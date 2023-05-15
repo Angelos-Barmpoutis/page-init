@@ -1,0 +1,22 @@
+{
+  "name": "page-init",
+  "version": "1.0.1",
+  "description": "page-init is a command line tool that quickly sets up a new HTML page with a linked SCSS file. Customize your setup with optional flags to create a CSS file instead of SCSS and add a JavaScript file with deferred loading.",
+  "main": "src/index.js",
+  "bin": {
+    "page-init": "./src/index.js"
+  },
+  "keywords": [
+    "automation",
+    "html",
+    "scss"
+  ],
+  "scripts": {
+    "page-init": "node src/index.js"
+  },
+  "author": "Angelos Barmpoutis",
+  "dependencies": {
+    "commander": "^10.0.1",
+    "inquirer": "^8.2.0"
+  }
+}
