@@ -1,6 +1,10 @@
 # Page Init
 
-`page-init` is a command-line interface (CLI) tool that automates the creation of HTML and SCSS files for new web pages. With a single command, you can create a new directory for your page and generate an HTML file with the necessary boilerplate code, as well as a linked SCSS file with commonly used helpers and components.
+`page-init` is a command-line interface (CLI) tool that automates the creation of HTML, CSS/SCSS, and JS files for new web pages. With a single command, you can create a new directory for your page and generate an HTML file with the necessary boilerplate code, as well as linked CSS/SCSS and JS files.
+
+## Description
+
+Page Init simplifies the process of creating new web pages by generating the required files and boilerplate code. It ensures consistency in your project structure and saves you time by automating repetitive tasks.
 
 ## Installation
 
@@ -10,41 +14,41 @@ npm install -g page-init
 
 ## Usage
 
-Navigate to the directory where you want to create a new HTML and SCSS file, and then run the following command:
+Navigate to the directory where you want to create a new page, and then run the following command:
 
 ```
-page-init
+page-init --style <css | scss> --output <path> [--no-script] [--vite-build] [--empty-scss]
 ```
 
-Follow the prompts to enter a filename (without extension), and the tool will create a new directory with the given filename inside the `pages` directory, and two files named `{filename}.html` and `{filename}.scss` inside the newly created directory.
-
-By default, `page-init` will create a new HTML file and SCSS file in a new directory with the same name as the filename you specify. The SCSS file will be linked to the HTML file using a `<link>` tag in the `<head>` section.
+Follow the prompts to enter a filename, and the tool will create a new directory with the given filename inside the specified output directory, and generate the corresponding HTML, CSS/SCSS, and JS files inside the newly created directory.
 
 ### Options
 
-Page Init also supports the following options:
+- `--output <path>` (required): Specifies the output directory where the page will be created.
+- `--style <css | scss>` (required): Specifies the style type for the page. Choose between `css` or `scss`.
+- `--no-script`: Optional. If provided, no JavaScript file will be created for the page.
+- `--empty-scss`: Optional. If provided, an empty SCSS file will be created for the page.
+- `--vite-build`: Optional. If provided, the `vite.config.js` file will be updated to include the newly created page.
 
-- `--css`: Use this flag to create a CSS file instead of an SCSS file.
-- `--js`: Use this flag to create a JavaScript file in the same folder as the other files and add this script as the last element to the bottom of the HTML `head` tag with the `defer` attribute.
-
-To use an option, simply include it when running the `page-init` command. For example:
+To use the options, simply include them when running the `page-init` command. For example:
 
 ```
-page-init --css
+page-init --style scss --no-script --output pages --vite-build --empty-scss
 ```
 
-This will create a CSS file instead of an SCSS file.
+This will create a new page with SCSS style, no JavaScript file, update the `vite.config.js` file, and create an empty SCSS file.
 
 ## Example
 
-Running `page-init` and entering `about` as the filename will create the following file structure and contents:
+Running the `page-init` command with the specified options will create the following file structure and contents:
 
 ```
 ./
 ├── pages/
 │   └── about/
 │       ├── about.html
-│       └── about.scss
+│       ├── about.scss
+│       └── about.js
 ```
 
 **about.html**
@@ -57,6 +61,7 @@ Running `page-init` and entering `about` as the filename will create the followi
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
     <link rel="stylesheet" href="about.scss" />
+    <script src="about.js" type="module"></script>
   </head>
   <body></body>
 </html>
@@ -73,16 +78,15 @@ Running `page-init` and entering `about` as the filename will create the followi
 @use "../../shared/components/footer.scss";
 ```
 
-## What makes page-init a useful tool
+**about.js**
 
-- **Saves time:** Instead of manually creating a new HTML and SCSS file for each new page you want to add to your project, you can use page-init to quickly generate boilerplate code. This saves you time and allows you to focus on the more important aspects of your project.
-- **Consistency:** By using page-init, you can ensure that each new page you create has the same basic structure and follows the same naming convention. This can help keep your project organized and make it easier to navigate.
-- **Ease of use:** Page-init is a simple and straightforward tool that is easy to use, even for developers who are new to command line tools. The prompts guide you through the process of creating a new page, so you don't have to worry about remembering complex command line syntax.
-- **Customization:** Page-init allows you to customize the boilerplate code it generates to fit your specific project needs. You can modify the SCSS imports to include your own styles, and you can also modify the HTML file to include any additional markup you need.
+```javascript
+// Your custom JavaScript code goes here
+```
 
 ## Requirements
 
-Page Init is designed to work best with the build found at [https://github.com/Angelos-Barmpoutis/vite-build](https://github.com/Angelos-Barmpoutis/vite-build). This build uses Vite to bundle and optimize your code for production. If you are not using this build, you may need to modify the SCSS imports accordingly.
+`page-init` is designed to work best with the build found at [Vanillium](https://github.com/Angelos-Barmpoutis/Vanillium). This build uses Vite to bundle and optimize your code for production. If you are not using this build, you may need to modify the SCSS imports and other parts of the generated code accordingly.
 
 ## Acknowledgments
 
@@ -94,7 +98,7 @@ This project makes use of the following open source software:
 
 ## Contributing
 
-If you would like to contribute to this project, please fork the repository and create a pull request with your changes.
+If you would like to contribute to this project, please fork the repository, create a new branch, and submit a pull request with your changes.
 
 ## Credits
 
