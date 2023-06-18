@@ -53,13 +53,13 @@ inquirer
     // Create new HTML file with boilerplate code and linked CSS/JS file
     let htmlContent = `<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${filename}</title>`;
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>${filename}</title>`;
 
     if (program.opts().style.toLowerCase() === "scss") {
-      htmlContent += `\n    <link rel="stylesheet" href="${filename}.scss" />`;
+      htmlContent += `\n      <link rel="stylesheet" href="${filename}.scss" />`;
       if (program.opts().emptyScss) {
         createScssFile("");
       } else {
@@ -71,18 +71,18 @@ inquirer
 @use "../../shared/components/footer.scss";`);
       }
     } else if (program.opts().style.toLowerCase() === "css") {
-      htmlContent += `\n    <link rel="stylesheet" href="${filename}.css" />`;
+      htmlContent += `\n      <link rel="stylesheet" href="${filename}.css" />`;
       createCssFile();
     }
 
     if (program.opts().script) {
-      htmlContent += `\n    <script src="${filename}.js" type="module"></script>`;
+      htmlContent += `\n      <script src="${filename}.js" type="module"></script>`;
       createJsFile();
     }
 
     htmlContent += `
-  </head>
-  <body></body>
+    </head>
+    <body></body>
 </html>`;
 
     writeFile(`${dir}/${filename}.html`, htmlContent, (err) => {
@@ -100,7 +100,8 @@ inquirer
           const filename = answers.filename;
           const output = program.opts().output;
           const camelCaseFilename = convertToCamelCase(filename);
-          const inputEntry = `\t${camelCaseFilename}: resolve(__dirname, "${output}/${filename}/${filename}.html"),`;
+          const outputPath = output.endsWith("/") ? output : output + "/";
+          const inputEntry = `\t${camelCaseFilename}: resolve(__dirname, "${outputPath}${filename}/${filename}.html"),`;
 
           return `${start}${inputEntry}\n\t\t\t${end}`;
         }
