@@ -1,6 +1,6 @@
 {
   "name": "page-init",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "page-init is a command line tool that quickly sets up a new HTML page with a linked SCSS file. Customize your setup with optional flags to create a CSS file instead of SCSS and add a JavaScript file with deferred loading.",
   "type": "module",
   "main": "src/index.js",
